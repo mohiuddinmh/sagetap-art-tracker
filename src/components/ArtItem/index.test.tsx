@@ -6,5 +6,3 @@ test('has title', () => {
   const title = screen.getByText("Art Rater")
   expect(title).toBeInTheDocument()
 })
-
-

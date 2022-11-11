@@ -13,18 +13,19 @@ interface Artwork {
     artist_title: string
     image_id: string
   }
-  rating: number
 }
 
-const Art = ({id, disabled}: ArtProps) => {
+const ArtItem = ({id, disabled}: ArtProps) => {
   const [voted, setVoted] = useState<boolean>(false)
   const [artwork, setArtwork] = useState<Artwork | null>(null)
 
+  const [rating, setRating] = useState<number>()
   useEffect(() => {
     getArtwork(id)
       .then(r => r.json())
       .then(json => setArtwork(json))
   }, [id])
+
 
   const submit = () => {
     console.log("Submitting!")
@@ -59,18 +60,16 @@ const Art = ({id, disabled}: ArtProps) => {
 
       <img style={{ width: 100 }} src={getImageUrl(artwork?.data.image_id)}/>
 
-      <p>Rating: {artwork?.rating}</p>
+      <p>Rating: {rating}</p>
 
       {artwork && [1, 2, 3, 4, 5].map(rating => <button key={rating} onClick={() => {
-        artwork.rating = rating;
+        setRating(rating)
         setVoted(true);
-      }}>{rating}
-
-      </button>)}
+      }}>{rating}</button>)}
 
       <button onClick={submit}>Submit</button>
     </div>
   )
 }
 
-export default Art
+export default ArtItem
