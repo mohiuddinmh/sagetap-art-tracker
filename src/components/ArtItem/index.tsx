@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getArtwork } from "../../api";
 import { getImageUrl } from "../../utils";
+import Rater from "../Rater";
 
 interface ArtProps {
   id: number
@@ -15,37 +16,20 @@ interface Artwork {
   }
 }
 
-const ArtItem = ({id, disabled}: ArtProps) => {
+const ArtItem = ({ id, disabled }: ArtProps) => {
   const [voted, setVoted] = useState<boolean>(false)
   const [artwork, setArtwork] = useState<Artwork | null>(null)
 
+
   const [rating, setRating] = useState<number>()
+
+
   useEffect(() => {
     getArtwork(id)
       .then(r => r.json())
       .then(json => setArtwork(json))
   }, [id])
 
-
-  const submit = () => {
-    console.log("Submitting!")
-    /*
-    Please have the submit button POST to https://20e2q.mocklab.io/rating with the following payload:
-
-      {
-        "id": {#id},
-        "rating": {#rating}
-      }
-
-    Where id is the artwork's id, and rating is the selected rating.
-
-    The endpoint should return the following:
-
-    {
-      "message": "Success"
-    }
-  */
-  }
 
   if (disabled) {
     return <></>
@@ -58,16 +42,12 @@ const ArtItem = ({id, disabled}: ArtProps) => {
 
       <h3>{artwork?.data.artist_title}</h3>
 
-      <img style={{ width: 100 }} src={getImageUrl(artwork?.data.image_id)}/>
+      <img alt='art image' style={{ width: 100 }} src={getImageUrl(artwork?.data.image_id)}/>
 
-      <p>Rating: {rating}</p>
-
-      {artwork && [1, 2, 3, 4, 5].map(rating => <button key={rating} onClick={() => {
-        setRating(rating)
-        setVoted(true);
-      }}>{rating}</button>)}
-
-      <button onClick={submit}>Submit</button>
+      {artwork && <>
+        <p>Rating: {rating}</p>
+        {!voted && <Rater {...{ setRating, setVoted }} />}
+      </>}
     </div>
   )
 }
