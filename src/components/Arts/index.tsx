@@ -9,7 +9,9 @@ const Arts = () => {
 	return <>
 		<h1>Art Rater</h1>
 		<section className={styles.artsContainer}>
-			{arts.map(({ id, disabled }) => <ArtItem key={id} {...{ id, disabled }} />)}
+			{arts.map(({ id, disabled }) => <div className={styles.artItem} key={id}>
+				<ArtItem {...{ id, disabled }} />
+			</div>)}
 		</section>
 	</>
 }

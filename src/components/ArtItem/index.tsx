@@ -36,7 +36,7 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
 	}
 
 	return (
-		<div className="item">
+		<>
 			{artwork && <>
 				<h2>{artwork.data.title}</h2>
         
@@ -50,7 +50,7 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
         
 				<RemoveArtItem id={id} />
 			</>}
-		</div>
+		</>
 	)
 }
 
