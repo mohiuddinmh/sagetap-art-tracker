@@ -4,6 +4,7 @@ import { getImageUrl } from '../../utils'
 import Rater from '../Rater'
 import { useQuery } from 'react-query'
 import { Artwork } from '../../types'
+import RemoveArtItem from '../RemoveArtItem'
 
 interface ArtProps {
   id: number
@@ -20,6 +21,7 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
 		isError,
 		error
 	} = useQuery<Artwork, Error>(['artwork', id], () => api.artwork.get(id))
+
 
 	if (disabled) {
 		return <></>
@@ -45,6 +47,8 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
 				<p data-testid='rating'>Rating: {rating}</p>
 
 				{!voted && <Rater {...{ rating, id: artwork.data?.id, setRating, setVoted }} />}
+        
+				<RemoveArtItem id={id} />
 			</>}
 		</div>
 	)

@@ -30,7 +30,6 @@ test('for an art item, clicking numbered button updates rating display below ima
 	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 
-	screen.debug()
 	const ratingOneButton = screen.getByRole('button', { name: /1/i })
 	const ratingTwoButton = screen.getByRole('button', { name: /2/i })
 

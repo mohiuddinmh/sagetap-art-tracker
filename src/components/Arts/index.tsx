@@ -1,16 +1,16 @@
 import React from 'react'
-import { Art } from '../../types'
 import ArtItem from '../ArtItem'
+import { useSnapshot } from 'valtio'
+import { state } from '../../store/artStore'
+import styles from './index.module.css'
 
-interface ArtsProps {
-  arts: Art[]
-}
-
-const Arts = (props: ArtsProps) => {
+const Arts = () => {
+	const { arts } = useSnapshot(state)
 	return <>
 		<h1>Art Rater</h1>
-
-		{props.arts.map(({ id, disabled }) => <ArtItem key={id} {...{ id, disabled }} />)}
+		<section className={styles.artsContainer}>
+			{arts.map(({ id, disabled }) => <ArtItem key={id} {...{ id, disabled }} />)}
+		</section>
 	</>
 }
 

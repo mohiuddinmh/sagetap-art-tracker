@@ -1,21 +1,11 @@
 import './App.css'
 import Arts from './components/Arts'
-import { Art } from './types'
+import AddArtItem from './components/AddArtItem'
 
-const arts: Art[] = [
-	{ id: 27992, disabled: false },
-	{ id: 27998, disabled: false },
-	{ id: 27999, disabled: false },
-	{ id: 27997, disabled: false },
-	{ id: 27993, disabled: false },
-]
-const App = () => {
-	return (
-		<div className="App">
-			<Arts arts={arts} />
-		</div>
-	)
-}
+const App = () => <div className="App">
+	<Arts />
+	<AddArtItem />
+</div>
 
 export default App
 

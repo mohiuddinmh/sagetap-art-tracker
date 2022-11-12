@@ -18,12 +18,4 @@ export const api = {
 	}
 }
 
-export const getArtwork = async (id: number) => fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
-
-export const postRating = async (request: RatingRequest) => fetch('https://20e2q.mocklab.io/rating', {
-	method: 'POST',
-	body: JSON.stringify(request)
-})
-
-
 

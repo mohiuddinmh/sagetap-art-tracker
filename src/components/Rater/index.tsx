@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { useMutation } from 'react-query'
-import { postRating } from '../../api'
+import { api } from '../../api'
 
 interface RaterProps {
   setRating: Dispatch<SetStateAction<number | undefined>>
@@ -11,7 +11,7 @@ interface RaterProps {
 
 const Rater = ({ id, rating, setRating, setVoted }: RaterProps) => {
 
-	const { mutate: mutateRating } = useMutation(postRating)
+	const { mutate: mutateRating } = useMutation(api.rating.post)
 
 	const handleRatingClick = (rating: number) => {
 		setRating(rating)
