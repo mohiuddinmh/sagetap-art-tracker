@@ -1,19 +1,26 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { useMutation } from "react-query";
+import { postRating } from "../../api";
 
-interface RaterProps{
-  setRating:  Dispatch<SetStateAction<number | undefined>>
-  setVoted:  Dispatch<SetStateAction<boolean>>
+interface RaterProps {
+  setRating: Dispatch<SetStateAction<number | undefined>>
+  setVoted: Dispatch<SetStateAction<boolean>>
+  id: number
+  rating: number | undefined
 }
 
-const Rater = (props: RaterProps) => {
+const Rater = ({ id, rating, setRating, setVoted }: RaterProps) => {
+
+  const { mutate: mutateRating } = useMutation(postRating)
 
   const handleRatingClick = (rating: number) => {
-    props.setRating(rating)
+    setRating(rating)
   }
 
   const handleSubmit = () => {
     console.log("Submitting!")
-    props.setVoted(true);
+    mutateRating({ id, rating: rating as number })
+    setVoted(true);
     /*
     Please have the submit button POST to https://20e2q.mocklab.io/rating with the following payload:
 
@@ -32,7 +39,9 @@ const Rater = (props: RaterProps) => {
   */
   }
   return <>
-    {[1, 2, 3, 4, 5].map(rating => <button key={rating} onClick={() => handleRatingClick(rating)}>{rating}</button>)}
+    {[1, 2, 3, 4, 5].map(selectedRating => <button key={selectedRating}
+                                                   onClick={() => handleRatingClick(selectedRating)}
+    >{selectedRating}</button>)}
 
     <button onClick={handleSubmit}>Submit</button>
   </>

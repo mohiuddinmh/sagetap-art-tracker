@@ -1,13 +1,11 @@
-import { render, screen } from '@testing-library/react'
-import App from "../../App"
+import { screen, waitFor } from "@testing-library/react";
+import ArtItem from "./index";
+import { renderWithQueryProvider } from "../../utils/testUtils";
 
-test('has title', () => {
-  render(<App />)
-  const title = screen.getByText("Art Rater")
-  expect(title).toBeInTheDocument()
-})
+test('for an art item, submit button is disabled until a rating is selected', async () => {
+  renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
 
-test('for an art item, submit button is disabled until a rating is selected', () => {
+  await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
 
 test('for an art item, clicking numbered button updates rating display below image to be that number', () => {
