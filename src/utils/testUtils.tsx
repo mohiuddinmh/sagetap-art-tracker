@@ -7,11 +7,11 @@ interface QueryClientWrapperProps {
 }
 
 const QueryClientWrapper = ({ children }: QueryClientWrapperProps) => (
-  <QueryClientProvider client={new QueryClient()}>
-    {children}
-  </QueryClientProvider>
+	<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
+		{children}
+	</QueryClientProvider>
 )
 
 export const renderWithQueryProvider = (ui: ReactNode) => render(
-  <QueryClientWrapper>{ui}</QueryClientWrapper>
+	<QueryClientWrapper>{ui}</QueryClientWrapper>
 )
