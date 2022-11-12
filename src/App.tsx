@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import Arts from './components/Arts'
 import { Art } from './types'
