@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor } from '@testing-library/react'
 import ArtItem from './index'
 import { renderWithQueryProvider } from '../../utils/testUtils'
 import { server } from '../../mocks/server'
@@ -25,9 +25,23 @@ test('for an art item, submit button is disabled until a rating is selected', as
 
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
-//
-// test('for an art item, clicking numbered button updates rating display below image to be that number', () => {
-// })
+
+test('for an art item, clicking numbered button updates rating display below image to be that number', async () => {
+	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
+
+	screen.debug()
+	const ratingOneButton = screen.getByRole('button', { name: /1/i })
+	const ratingTwoButton = screen.getByRole('button', { name: /2/i })
+
+	fireEvent.click(ratingOneButton)
+	expect(screen.getByTestId('rating').textContent).toBe('Rating: 1')
+
+	fireEvent.click(ratingTwoButton)
+	expect(screen.getByTestId('rating')).toHaveTextContent('Rating: 2')
+})
+
+
 //
 // test('for an art item, clicking numbered button updates rating display below image to be that number, clicking two different numbers one after the other', () => {
 // })

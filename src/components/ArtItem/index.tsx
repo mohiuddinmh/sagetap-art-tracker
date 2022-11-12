@@ -42,7 +42,7 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
         
 				<img alt='art image' style={{ width: 100 }} src={getImageUrl(artwork.data?.image_id)} />
         
-				<p>Rating: {rating}</p>
+				<p data-testid='rating'>Rating: {rating}</p>
 
 				{!voted && <Rater {...{ rating, id: artwork.data?.id, setRating, setVoted }} />}
 			</>}
