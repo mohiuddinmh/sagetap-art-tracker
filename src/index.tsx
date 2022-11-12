@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import QueryProvider from "./queryProvider";
-import { ReactQueryDevtools } from "react-query/devtools";
+import QueryProvider from './queryProvider'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 root.render(
-  <React.StrictMode>
-    <QueryProvider>
-      <App/>
-      <ReactQueryDevtools/>
-    </QueryProvider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<QueryProvider>
+			<App />
+			<ReactQueryDevtools />
+		</QueryProvider>
+	</React.StrictMode>
 )
 
 // If you want to start measuring performance in your app, pass a function
