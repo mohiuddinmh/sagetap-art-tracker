@@ -25,11 +25,11 @@ export default function Rater({ id, rating, voted, setRating, setVoted }: RaterP
 		setVoted(true)
 	}
 
-	return <>
+	return <div style={{ display: 'flex', justifyItems: 'center', justifyContent: 'center' }}>
 		<Rating data-testid="rating-stars" readOnly={voted} onChange={handleRatingChange} />
 		{!voted && <Button
 			data-testid="submit-rating"
 			disabled={!rating}
 			onClick={handleSubmit}>Submit</Button>}
-	</>
+	</div>
 }
