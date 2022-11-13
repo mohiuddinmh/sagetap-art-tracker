@@ -54,6 +54,7 @@ export default function ArtItem({ id, disabled }: ArtProps) {
 					<Typography variant="body2" color="text.secondary">
 						{artwork.data?.artist_title}
 					</Typography>
+					<p data-testid='rating'>Rating: {rating}</p>
 					<Rater {...{ rating, voted, id: artwork.data?.id, setRating, setVoted }} />
 				</CardContent>
 			</>}
