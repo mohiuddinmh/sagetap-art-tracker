@@ -1,20 +1,22 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, SyntheticEvent } from 'react'
 import { useMutation } from 'react-query'
 import { api } from '../../api'
+import { Button, Rating } from '@mui/material'
 
 interface RaterProps {
-  setRating: Dispatch<SetStateAction<number | undefined>>
+  setRating: Dispatch<SetStateAction<number | null>>
+  voted: boolean,
   setVoted: Dispatch<SetStateAction<boolean>>
   id: number
-  rating: number | undefined
+  rating: number | null
 }
 
-export default function Rater({ id, rating, setRating, setVoted }: RaterProps) {
+export default function Rater({ id, rating, voted, setRating, setVoted }: RaterProps) {
 
 	const { mutate: mutateRating } = useMutation(api.rating.post)
 
-	const handleRatingClick = (rating: number) => {
-		setRating(rating)
+	const handleRatingChange = (event: SyntheticEvent, value: number | null) => {
+		setRating(value)
 	}
 
 	const handleSubmit = () => {
@@ -24,10 +26,10 @@ export default function Rater({ id, rating, setRating, setVoted }: RaterProps) {
 	}
 
 	return <>
-		{[1, 2, 3, 4, 5].map(selectedRating => <button key={selectedRating}
-			onClick={() => handleRatingClick(selectedRating)}
-		>{selectedRating}</button>)}
-
-		<button onClick={handleSubmit}>Submit</button>
+		<Rating data-testid="rating-stars" readOnly={voted} onChange={handleRatingChange} />
+		{!voted && <Button
+			data-testid="submit-rating"
+			disabled={!rating}
+			onClick={handleSubmit}>Submit</Button>}
 	</>
 }

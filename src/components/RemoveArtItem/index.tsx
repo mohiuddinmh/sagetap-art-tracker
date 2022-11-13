@@ -1,5 +1,7 @@
 import { actions } from '../../store/artStore'
 import React from 'react'
+import { Tooltip } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 interface RemoveArtItemProps {
   id: number
@@ -11,5 +13,10 @@ export default function RemoveArtItem({ id }: RemoveArtItemProps) {
 		actions.removeArt(id)
 	}
 
-	return <button onClick={handleRemoveClick}>Remove</button>
+	return <Tooltip
+		onClick={handleRemoveClick}
+		style={{ float: 'right', alignSelf: 'end' }}
+		title="Remove Art Item">
+		<CloseIcon />
+	</Tooltip>
 }

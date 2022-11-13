@@ -14,5 +14,5 @@ export interface Artwork {
 
 export interface RatingRequest {
   id: number
-  rating: number
+  rating: number | null
 }
