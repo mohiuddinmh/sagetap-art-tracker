@@ -5,12 +5,11 @@ interface RemoveArtItemProps {
   id: number
 }
 
-const RemoveArtItem = ({ id }: RemoveArtItemProps) => {
+export default function RemoveArtItem({ id }: RemoveArtItemProps) {
 
 	const handleRemoveClick = () => {
 		actions.removeArt(id)
 	}
+
 	return <button onClick={handleRemoveClick}>Remove</button>
 }
-
-export default RemoveArtItem

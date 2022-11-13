@@ -9,7 +9,7 @@ interface RaterProps {
   rating: number | undefined
 }
 
-const Rater = ({ id, rating, setRating, setVoted }: RaterProps) => {
+export default function Rater({ id, rating, setRating, setVoted }: RaterProps) {
 
 	const { mutate: mutateRating } = useMutation(api.rating.post)
 
@@ -21,23 +21,8 @@ const Rater = ({ id, rating, setRating, setVoted }: RaterProps) => {
 		console.log('Submitting!')
 		mutateRating({ id, rating: rating as number })
 		setVoted(true)
-		/*
-    Please have the submit button POST to https://20e2q.mocklab.io/rating with the following payload:
-
-      {
-        "id": {#id},
-        "rating": {#rating}
-      }
-
-    Where id is the artwork's id, and rating is the selected rating.
-
-    The endpoint should return the following:
-
-    {
-      "message": "Success"
-    }
-  */
 	}
+
 	return <>
 		{[1, 2, 3, 4, 5].map(selectedRating => <button key={selectedRating}
 			onClick={() => handleRatingClick(selectedRating)}
@@ -46,5 +31,3 @@ const Rater = ({ id, rating, setRating, setVoted }: RaterProps) => {
 		<button onClick={handleSubmit}>Submit</button>
 	</>
 }
-
-export default Rater

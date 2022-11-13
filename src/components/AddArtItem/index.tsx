@@ -1,7 +1,7 @@
 import { actions } from '../../store/artStore'
 import React, { useState } from 'react'
 
-const AddArtItem = () => {
+export default function AddArtItem() {
 	const [artId, setArtId] = useState<number | undefined>()
 
 	const handleAddClick = () => {
@@ -18,4 +18,3 @@ const AddArtItem = () => {
 	</>
 }
 
-export default AddArtItem

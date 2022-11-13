@@ -4,7 +4,7 @@ import { useSnapshot } from 'valtio'
 import { state } from '../../store/artStore'
 import styles from './index.module.css'
 
-const Arts = () => {
+export default function Arts() {
 	const { arts } = useSnapshot(state)
 	return <>
 		<h1>Art Rater</h1>
@@ -16,4 +16,3 @@ const Arts = () => {
 	</>
 }
 
-export default Arts

@@ -6,7 +6,8 @@ interface QueryProviderProps {
 }
 
 export default function QueryProvider({ children }: QueryProviderProps) {
-  const queryClient = new QueryClient()
+	const queryClient = new QueryClient()
 
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+	return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 }
+

@@ -11,7 +11,8 @@ interface ArtProps {
   disabled: boolean
 }
 
-const ArtItem = ({ id, disabled }: ArtProps) => {
+export default function ArtItem({ id, disabled }: ArtProps) {
+
 	const [voted, setVoted] = useState<boolean>(false)
 	const [rating, setRating] = useState<number | undefined>()
 
@@ -53,5 +54,3 @@ const ArtItem = ({ id, disabled }: ArtProps) => {
 		</>
 	)
 }
-
-export default ArtItem
