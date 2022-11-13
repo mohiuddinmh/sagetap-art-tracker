@@ -1,5 +1,7 @@
 import { actions } from '../../store/artStore'
 import React, { useState } from 'react'
+import { Button, TextField } from '@mui/material'
+import styles from './index.module.css'
 
 export default function AddArtItem() {
 	const [artId, setArtId] = useState<number | undefined>()
@@ -12,9 +14,10 @@ export default function AddArtItem() {
 		setArtId(+event.target.value)
 	}
 
-	return <>
-		<input type="number" placeholder='Enter Art Id' onChange={handleArtIdChange} />
-		<button onClick={handleAddClick}>Add</button>
-	</>
+	return <div className={styles.addArtItem}>
+		<TextField type="number" label="Please enter Art ID" variant='standard' onChange={handleArtIdChange} />
+
+		<Button onClick={handleAddClick} variant='text'>Add</Button>
+	</div>
 }
 

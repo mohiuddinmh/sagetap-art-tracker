@@ -17,7 +17,7 @@ export const state = proxy<ArtState>({
 
 export const actions = {
 	addArt: (id: number) => {
-		state.arts.push({ id, disabled: false })
+		state.arts.unshift({ id, disabled: false })
 	},
 	removeArt: (id: number) => {
 		const foundAt = state.arts.findIndex(a => a.id === id)
