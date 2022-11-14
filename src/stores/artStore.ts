@@ -7,6 +7,7 @@ interface ArtState {
 
 const initialState = {
 	arts: [
+		{ id: 12345678, disabled: false },
 		{ id: 27992, disabled: false },
 		{ id: 27998, disabled: false },
 		{ id: 27999, disabled: false },

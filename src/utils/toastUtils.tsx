@@ -20,7 +20,7 @@ export const setToast = ({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onClose = (() => {
 	}),
-	position = 'top-right',
+	position = TOAST_POSITION.TOP_CENTER,
 	ref = {},
 	theme = TOAST_THEME.DEFAULT,
 	type = TOAST_TYPE.DEFAULT,
