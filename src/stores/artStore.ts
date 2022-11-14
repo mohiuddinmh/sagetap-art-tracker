@@ -1,21 +1,24 @@
-import { proxy } from 'valtio'
+import { proxy, useSnapshot } from 'valtio'
 import { Art } from '../types'
 
 interface ArtState {
   arts: Art[]
 }
 
-export const state = proxy<ArtState>({
+const initialState = {
 	arts: [
 		{ id: 27992, disabled: false },
 		{ id: 27998, disabled: false },
 		{ id: 27999, disabled: false },
-		{ id: 27997, disabled: false },
-		{ id: 27993, disabled: false },
+		{ id: 27997, disabled: true },
+		{ id: 27993, disabled: true },
 	]
-})
+}
 
-export const actions = {
+const state = proxy<ArtState>(initialState)
+
+const actions = {
+	hasArt: (id: number | undefined) => id && state.arts.some(a => a.id === id),
 	addArt: (id: number) => {
 		state.arts.unshift({ id, disabled: false })
 	},
@@ -23,4 +26,9 @@ export const actions = {
 		const foundAt = state.arts.findIndex(a => a.id === id)
 		foundAt >= 0 && state.arts.splice(foundAt, 1)
 	},
+}
+
+export const useArtStore = () => {
+	const snap = useSnapshot(state)
+	return { snap, actions }
 }

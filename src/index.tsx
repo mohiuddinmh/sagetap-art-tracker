@@ -5,6 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import QueryProvider from './queryProvider'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { ToastContainer } from 'react-toastify'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,6 +15,7 @@ root.render(
 		<QueryProvider>
 			<App />
 			<ReactQueryDevtools />
+			<ToastContainer />
 		</QueryProvider>
 	</React.StrictMode>
 )

@@ -5,13 +5,13 @@ import { server } from '../../mocks/server'
 import { rest } from 'msw'
 
 test('an art item is fetched and displayed correctly', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
 
 test('an error message is displayed if the api call fails', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 	server.use(rest.get('https://api.artic.edu/api/v1/artworks/:id', (req, res, ctx) => {
 		return res(
 			ctx.status(400),
@@ -21,13 +21,13 @@ test('an error message is displayed if the api call fails', async () => {
 })
 
 test('for an art item, submit button is disabled until a rating is selected', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
 
 test('for an art item, clicking numbered button updates rating display below image to be that number', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 
 	const ratingScale = screen.getByTestId('rating-stars')

@@ -9,10 +9,9 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 
 interface ArtProps {
   id: number
-  disabled: boolean
 }
 
-export default function ArtItem({ id, disabled }: ArtProps) {
+export default function ArtItem({ id }: ArtProps) {
 
 	const [voted, setVoted] = useState<boolean>(false)
 	const [rating, setRating] = useState<number | null>(null)
@@ -23,11 +22,6 @@ export default function ArtItem({ id, disabled }: ArtProps) {
 		isError,
 		error
 	} = useQuery<Artwork, Error>(['artwork', id], () => api.artwork.get(id))
-
-
-	if (disabled) {
-		return <></>
-	}
 
 	if (isLoading) {
 		return <>Loading...</>
