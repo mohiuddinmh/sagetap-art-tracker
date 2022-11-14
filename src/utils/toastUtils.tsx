@@ -12,8 +12,10 @@ interface SetToastType {
   isLoading?: boolean
 }
 
+const AUTO_CLOSE_MS = 5000
+
 export const setToast = ({
-	autoClose = 10000,
+	autoClose = AUTO_CLOSE_MS,
 	content,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onClose = (() => {
@@ -39,7 +41,7 @@ export const updateToastOnError = (toastId, { render, theme = TOAST_THEME.DEFAUL
 		type: TOAST_TYPE.ERROR as TypeOptions,
 		theme,
 		isLoading: false,
-		autoClose: 10000,
+		autoClose: AUTO_CLOSE_MS,
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onClose: () => {
 		},
@@ -53,7 +55,7 @@ export const updateToastOnSuccess = (toastId: any, { render }: any) => {
 		type: TOAST_TYPE.SUCCESS as TypeOptions,
 		theme: TOAST_THEME.DEFAULT as Theme,
 		isLoading: false,
-		autoClose: 10000,
+		autoClose: AUTO_CLOSE_MS,
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onClose: () => {
 		},
