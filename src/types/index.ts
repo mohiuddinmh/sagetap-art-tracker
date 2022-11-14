@@ -9,10 +9,11 @@ export interface Artwork {
     title: string
     artist_title: string
     image_id: string
+    thumbnail: { alt_text: string }
   }
 }
 
 export interface RatingRequest {
   id: number
-  rating: number
+  rating: number | null
 }

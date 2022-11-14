@@ -3,35 +3,42 @@ import ArtItem from './index'
 import { renderWithQueryProvider } from '../../utils/testUtils'
 import { server } from '../../mocks/server'
 import { rest } from 'msw'
+import { ToastContainer } from 'react-toastify'
 
 test('an art item is fetched and displayed correctly', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
 
 test('an error message is displayed if the api call fails', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(
+		<>
+			<ArtItem id={1} />
+			<ToastContainer />
+		</>
+	)
 	server.use(rest.get('https://api.artic.edu/api/v1/artworks/:id', (req, res, ctx) => {
 		return res(
 			ctx.status(400),
 		)
 	}))
-	await waitFor(() => expect(screen.getByText('400 Bad Request')).toBeInTheDocument())
+	await waitFor(() => expect(screen.getByText(/Unable to find an art for id 1/)).toBeInTheDocument())
 })
 
 test('for an art item, submit button is disabled until a rating is selected', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 })
 
 test('for an art item, clicking numbered button updates rating display below image to be that number', async () => {
-	renderWithQueryProvider(<ArtItem id={1} disabled={false} />)
+	renderWithQueryProvider(<ArtItem id={1} />)
 	await waitFor(() => expect(screen.getByText('Plate One from Collection of Various Vases')).toBeInTheDocument())
 
-	const ratingOneButton = screen.getByRole('button', { name: /1/i })
-	const ratingTwoButton = screen.getByRole('button', { name: /2/i })
+	const ratingScale = screen.getByTestId('rating-stars')
+	const ratingOneButton = ratingScale.querySelector('[value=\'1\']') as Element
+	const ratingTwoButton = ratingScale.querySelector('[value=\'2\']') as Element
 
 	fireEvent.click(ratingOneButton)
 	expect(screen.getByTestId('rating').textContent).toBe('Rating: 1')
@@ -41,7 +48,7 @@ test('for an art item, clicking numbered button updates rating display below ima
 })
 
 
-//
+// TODO
 // test('for an art item, clicking numbered button updates rating display below image to be that number, clicking two different numbers one after the other', () => {
 // })
 //
